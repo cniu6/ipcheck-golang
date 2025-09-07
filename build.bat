@@ -5,11 +5,25 @@ set DIST=dist
 if not exist %DIST% mkdir %DIST%
 set APP=ipcheck
 
-REM Colors
-for /f "tokens=1,2 delims==" %%a in ('"prompt $E" ^| cmd') do set "ESC=%%b"
-set GREEN=%ESC%[92m
-set RED=%ESC%[91m
-set RESET=%ESC%[0m
+REM Detect ANSI color support (Windows 10+ or VSCode terminal)
+set USECOLOR=0
+for /f "tokens=4-5 delims=. " %%i in ('ver') do (
+	set MAJOR=%%i
+)
+REM VSCode terminal usually supports ANSI; check TERM env
+if defined TERM set USECOLOR=1
+if "%MAJOR%" GEQ "10" set USECOLOR=1
+
+if %USECOLOR%==1 (
+	for /f "tokens=1,2 delims==" %%a in ('"prompt $E" ^| cmd') do set "ESC=%%b"
+	set GREEN=%ESC%[92m
+	set RED=%ESC%[91m
+	set RESET=%ESC%[0m
+) else (
+	set GREEN=
+	set RED=
+	set RESET=
+)
 
 REM Version (optional)
 for /f %%i in ('git rev-parse --short HEAD 2^>nul') do set GIT_SHA=%%i
@@ -52,5 +66,4 @@ if %FAIL%==0 (
 	exit /b 1
 )
 
-endlocal 
 endlocal 
