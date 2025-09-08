@@ -1,7 +1,7 @@
 <h2 align="center">IP 连通性检测 (IPv4/IPv6) · PING 检测 · IP是否被墙</h2>
-<h5 align="center">国内腾讯云服务器 · 支持 IPv4/IPv6 · 页面与 API</h5>
-
----
+<h4 align="center">国内腾讯云服务器 · 支持 IPv4/IPv6 · 页面与 API</h4>
+<h5 align="center">访问站点 http://ip.golxc.com </h5>
+--- 
 
 ## 8W2H（精简版）
 - 为什么（Why）
